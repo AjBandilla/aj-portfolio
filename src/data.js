@@ -18,17 +18,17 @@ export const stats = [
 
 export const about = [
   "I'm a Full Stack Developer at Telford Svc. Phils. Inc., where I've worked since March 2025. My work is mostly company systems: inventory, biometric attendance, recruitment, and HR. I use Laravel for the back end and React for the front end.",
-  "I finished my BS in Information Technology at Eastern Samar State University in 2024. I'm open to commission-based projects, and to working with companies that have bigger web development opportunities.",
+  "I finished my BS in Information Technology at Eastern Samar State University in 2024. I'm open to commission-based projects, and to companies that are hiring for more opportunities in web development.",
 ];
 
 export const openTo = [
   {
-    title: "Commission work",
+    title: "Commission-based projects",
     text: "Websites, web apps, and company systems built to your requirements, on a per-project basis.",
   },
   {
-    title: "Hiring companies",
-    text: "Open to full-time roles and larger projects in web development where I can take on more responsibility.",
+    title: "Companies that are hiring",
+    text: "Open to companies hiring for more opportunities in web development, where I can take on bigger projects and responsibilities.",
   },
 ];
 

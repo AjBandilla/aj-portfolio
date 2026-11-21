@@ -98,7 +98,8 @@ function Hero() {
       <div className="container hero-grid">
         <div>
           <p className="eyebrow mono">
-            <span className="dot" /> Open for commissions and hiring
+            <span className="dot" /> Open for commission-based projects and
+            companies that are hiring
           </p>
           <h1>
             Hi, I'm <span className="grad">{profile.name}</span>.
@@ -128,7 +129,8 @@ function Hero() {
             <span className="c-s">"Node.js"</span>,{" "}
             <span className="c-s">"MySQL"</span>],
             {"\n  "}based: <span className="c-s">"Cavite, PH"</span>,{"\n  "}
-            open: <span className="c-s">"commissions, hiring"</span>,{"\n"}
+            open: <span className="c-s">"commission projects, hiring"</span>,
+            {"\n"}
             {"}"};
           </pre>
         </div>
@@ -182,7 +184,8 @@ function About() {
               {languages.map((l) => l.name).join(", ")}
             </li>
             <li>
-              <span>Open to</span>Commission work and full-time opportunities
+              <span>Open to</span>Commission-based projects and companies that
+              are hiring
             </li>
           </ul>
         </div>
@@ -323,11 +326,14 @@ function Contact() {
     <section id="contact" className="section contact">
       <div className="container reveal">
         <p className="kicker mono">06 / contact</p>
-        <h2 className="section-title">Open for commissions and hiring</h2>
+        <h2 className="section-title">
+          Open for commission-based projects and companies that are hiring for
+          more opportunities
+        </h2>
         <p className="lead narrow">
-          If you have a project you need built, or your company is looking for a
-          web developer, send me a message. Email or phone is the quickest way
-          to reach me.
+          If you have a project you need built, or your company is hiring web
+          developers, send me a message. Email or phone is the quickest way to
+          reach me.
         </p>
         <div className="open-grid">
           {openTo.map((o) => (
