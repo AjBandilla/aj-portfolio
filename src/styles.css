@@ -39,6 +39,9 @@ ul {
 .muted {
   color: var(--muted);
 }
+.small {
+  font-size: 13px;
+}
 .container {
   width: min(1120px, 100% - 40px);
   margin-inline: auto;
@@ -216,6 +219,25 @@ h1 {
 }
 .btn.ghost:hover {
   background: var(--surface);
+}
+
+/* Social links */
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 22px;
+}
+.social a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.social a:hover {
+  text-decoration: underline;
+}
+.contact .social {
+  justify-content: center;
 }
 
 .code-card {
@@ -485,20 +507,20 @@ h1 {
   font-size: 13.5px;
 }
 
-/* Reveal */
-.reveal {
+/* Reveal: only hidden once JS has added the "js" class to <html> */
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition:
     opacity 0.7s ease,
     transform 0.7s ease;
 }
-.reveal.in {
+.js .reveal.in {
   opacity: 1;
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
     transition: none;

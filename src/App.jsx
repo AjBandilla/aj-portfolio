@@ -20,6 +20,9 @@ const NAV = [
   ["contact", "Contact"],
 ];
 
+// Defined outside the component so the observer effect doesn't re-run every render.
+const SECTION_IDS = ["hero", ...NAV.map(([id]) => id)];
+
 function useActiveSection(ids) {
   const [active, setActive] = useState(ids[0]);
   useEffect(() => {
@@ -40,6 +43,9 @@ function useActiveSection(ids) {
 
 function useReveal() {
   useEffect(() => {
+    // Content is only hidden for the animation once JS is running,
+    // so nothing stays invisible if scripts fail.
+    document.documentElement.classList.add("js");
     const els = document.querySelectorAll(".reveal");
     const obs = new IntersectionObserver(
       (entries) =>
@@ -57,7 +63,7 @@ function useReveal() {
 }
 
 function Header() {
-  const active = useActiveSection(["hero", ...NAV.map(([id]) => id)]);
+  const active = useActiveSection(SECTION_IDS);
   const [open, setOpen] = useState(false);
   return (
     <header className="header">
@@ -92,14 +98,31 @@ function Header() {
   );
 }
 
+function SocialLinks() {
+  const links = [
+    profile.github && ["GitHub", profile.github],
+    profile.linkedin && ["LinkedIn", profile.linkedin],
+  ].filter(Boolean);
+  if (links.length === 0) return null;
+  return (
+    <div className="social">
+      {links.map(([label, href]) => (
+        <a key={label} href={href} target="_blank" rel="noreferrer">
+          {label} ↗
+        </a>
+      ))}
+    </div>
+  );
+}
+
 function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="container hero-grid">
         <div>
           <p className="eyebrow mono">
-            <span className="dot" /> Open for commission-based projects and
-            companies that are hiring
+            <span className="dot" /> Open to full-time roles and freelance
+            projects
           </p>
           <h1>
             Hi, I'm <span className="grad">{profile.name}</span>.
@@ -110,10 +133,21 @@ function Hero() {
             <a className="btn primary" href="#projects">
               View my work
             </a>
+            {profile.resume && (
+              <a
+                className="btn ghost"
+                href={profile.resume}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Download resume
+              </a>
+            )}
             <a className="btn ghost" href="#contact">
               Get in touch
             </a>
           </div>
+          <SocialLinks />
         </div>
         <div className="code-card mono" aria-hidden="true">
           <div className="code-bar">
@@ -129,8 +163,7 @@ function Hero() {
             <span className="c-s">"Node.js"</span>,{" "}
             <span className="c-s">"MySQL"</span>],
             {"\n  "}based: <span className="c-s">"Cavite, PH"</span>,{"\n  "}
-            open: <span className="c-s">"commission projects, hiring"</span>,
-            {"\n"}
+            open: <span className="c-s">"full-time, freelance"</span>,{"\n"}
             {"}"};
           </pre>
         </div>
@@ -176,16 +209,15 @@ function About() {
               {profile.location}
             </li>
             <li>
-              <span>Currently</span>Full Stack Developer @ Telford Svc. Phils.
-              Inc.
+              <span>Currently</span>Full Stack Developer at a manufacturing
+              company
             </li>
             <li>
               <span>Languages</span>
               {languages.map((l) => l.name).join(", ")}
             </li>
             <li>
-              <span>Open to</span>Commission-based projects and companies that
-              are hiring
+              <span>Open to</span>Full-time roles and commission-based projects
             </li>
           </ul>
         </div>
@@ -295,7 +327,8 @@ function Education() {
             <span className="period mono">{education.year}</span>
           </div>
           <p className="gwa">
-            GWA <strong>{education.gwa}</strong>
+            GWA <strong>{education.gwa}</strong>{" "}
+            <span className="muted small">{education.gwaNote}</span>
           </p>
           <div className="chips small">
             {education.courses.map((c) => (
@@ -326,13 +359,10 @@ function Contact() {
     <section id="contact" className="section contact">
       <div className="container reveal">
         <p className="kicker mono">06 / contact</p>
-        <h2 className="section-title">
-          Open for commission-based projects and companies that are hiring for
-          more opportunities
-        </h2>
+        <h2 className="section-title">Let's build something together</h2>
         <p className="lead narrow">
-          If you have a project you need built, or your company is hiring web
-          developers, send me a message. Email or phone is the quickest way to
+          Whether you're hiring web developers or have a project that needs
+          building, send me a message. Email or phone is the quickest way to
           reach me.
         </p>
         <div className="open-grid">
@@ -351,6 +381,7 @@ function Contact() {
             {profile.phone}
           </a>
         </div>
+        <SocialLinks />
       </div>
     </section>
   );

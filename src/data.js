@@ -1,12 +1,24 @@
+// ---------------------------------------------------------------
+// EDIT THESE BEFORE DEPLOYING
+// - EMPLOYER: real company name is shown ONLY in the Experience section.
+//   To keep it generic, change it to "Manufacturing Company (name available on request)".
+// - github / linkedin / resume: leave as "" to hide the button, or fill in.
+//   For the resume, put resume.pdf inside the /public folder and use "/resume.pdf".
+// ---------------------------------------------------------------
+const EMPLOYER = "Telford Svc. Phils. Inc.";
+
 export const profile = {
   name: "Ariel John Bandilla",
   title: "Full Stack Developer",
   tagline:
-    "I work with Laravel and React. At Telford Svc. Phils. Inc., I develop the company's inventory, attendance, recruitment, and HR systems.",
+    "I build Laravel and React web systems for business operations: inventory, attendance, recruitment, and HR, used by 1,000+ people daily.",
   location: "General Mariano Alvarez, Cavite, PH",
   email: "bandillaaj9@gmail.com",
   phone: "+63 956 364 9802",
   phoneHref: "+639563649802",
+  github: "", // e.g. "https://github.com/your-username"
+  linkedin: "", // e.g. "https://www.linkedin.com/in/your-username"
+  resume: "", // e.g. "/resume.pdf"
 };
 
 export const stats = [
@@ -17,18 +29,18 @@ export const stats = [
 ];
 
 export const about = [
-  "I'm a Full Stack Developer at Telford Svc. Phils. Inc., where I've worked since March 2025. My work is mostly company systems: inventory, biometric attendance, recruitment, and HR. I use Laravel for the back end and React for the front end.",
-  "I finished my BS in Information Technology at Eastern Samar State University in 2024. I'm open to commission-based projects, and to companies that are hiring for more opportunities in web development.",
+  "I'm a Full Stack Developer working on internal business systems for a manufacturing company in Cavite: inventory, biometric attendance, recruitment, and HR. I use Laravel for the back end and React for the front end.",
+  "I finished my BS in Information Technology at Eastern Samar State University in 2024. I'm open to full-time roles and commission-based projects in web development.",
 ];
 
 export const openTo = [
   {
-    title: "Commission-based projects",
-    text: "Websites, web apps, and company systems built to your requirements, on a per-project basis.",
+    title: "Full-time roles",
+    text: "Looking for a team where I can take on bigger projects and more responsibility in web development.",
   },
   {
-    title: "Companies that are hiring",
-    text: "Open to companies hiring for more opportunities in web development, where I can take on bigger projects and responsibilities.",
+    title: "Commission-based projects",
+    text: "Websites, web apps, and business systems built to your requirements, on a per-project basis.",
   },
 ];
 
@@ -54,8 +66,8 @@ export const skills = [
 export const experience = [
   {
     role: "Full Stack Developer (Laravel with React)",
-    company: "Telford Svc. Phils. Inc.",
-    place: "Gen. Trias, Cavite",
+    company: EMPLOYER,
+    place: "Cavite, PH",
     period: "March 2025 – Present",
     points: [
       "Built and shipped REST APIs in Laravel and Node.js serving 1,000+ daily active users, cutting average response time by 40%.",
@@ -65,19 +77,20 @@ export const experience = [
   },
 ];
 
+// Project names are generic on purpose. No company links, names, or screenshots.
 export const projects = [
   {
-    name: "Store Portal",
+    name: "Inventory Portal",
     tag: "Inventory · 2025",
     stack: ["Laravel", "React"],
     desc: "Inventory management portal for company stock, stored items, and client-consigned materials.",
     points: [
       "Employee request system for work-related supplies and materials, with tracking of client-consigned items.",
-      "Automated reports generated and sent to the company's clients from the Store Department.",
+      "Automated reports generated and sent to clients from the store department.",
     ],
   },
   {
-    name: "Daily Time Record",
+    name: "Attendance Monitoring System",
     tag: "Attendance · 2025",
     stack: ["Laravel", "React", "ZKTeco", "SecuGen"],
     desc: "Real-time attendance monitoring integrated with ZKTeco biometric fingerprint devices.",
@@ -87,17 +100,13 @@ export const projects = [
     ],
   },
   {
-    name: "Telford Recruitment",
+    name: "Recruitment Platform",
     tag: "Recruitment · 2026",
     stack: ["Laravel", "React"],
     desc: "Career and job-posting platform processing 300+ applications daily.",
     points: [
-      "Deployed applicants sync automatically into the company's employee master list on a local server.",
+      "Hired applicants sync automatically into the employee master list on a local server.",
     ],
-    link: {
-      label: "recruitment.telfordph.com",
-      href: "https://recruitment.telfordph.com",
-    },
   },
   {
     name: "Human Resource Information System",
@@ -105,7 +114,7 @@ export const projects = [
     stack: ["Laravel", "React"],
     desc: "HRIS for employee master list management with integrated Health Insurance and Life Insurance modules.",
     points: [
-      "Automated HR reports generated and transmitted to the company's main site in Singapore.",
+      "Automated HR reports generated and sent to the company's head office.",
     ],
   },
 ];
@@ -116,6 +125,7 @@ export const education = {
   degree: "BS Information Technology",
   year: "2024",
   gwa: "1.77",
+  gwaNote: "(1.00 is the highest grade)",
   courses: [
     "Data Structures & Algorithms",
     "Software Engineering",
