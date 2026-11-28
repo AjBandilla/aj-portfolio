@@ -1041,3 +1041,128 @@ h1 {
     animation: none;
   }
 }
+
+/* Doodles: hand-drawn line art */
+.doodle {
+  display: block;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+  pointer-events: none;
+}
+.doodle .fill-h {
+  fill: var(--hazard);
+}
+.doodle .fill-o {
+  fill: var(--orange);
+}
+.doodle .fill-c {
+  fill: var(--card);
+}
+.section .container {
+  position: relative;
+}
+.section-doodle {
+  position: absolute;
+  top: -8px;
+  right: 0;
+  width: 104px;
+  height: 104px;
+  transform: rotate(7deg);
+}
+.d-spin {
+  animation: doodle-spin 28s linear infinite;
+}
+.d-bob {
+  animation: doodle-bob 3.2s ease-in-out infinite;
+}
+@keyframes doodle-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes doodle-bob {
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+/* Hero sticker + sparks */
+.map-wrap {
+  position: relative;
+}
+.sticker {
+  position: absolute;
+  top: -34px;
+  right: -14px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  padding: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--hazard);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(8deg);
+}
+.sticker .doodle {
+  width: 100%;
+  height: 100%;
+}
+.spark {
+  position: absolute;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+}
+.spark-a {
+  top: -40px;
+  right: 92px;
+  transform: rotate(-10deg);
+}
+.spark-b {
+  bottom: -16px;
+  left: -14px;
+  width: 30px;
+  height: 30px;
+  transform: rotate(12deg);
+}
+.doodle-note {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  transform: rotate(-4deg);
+  align-self: center;
+}
+.doodle-note .doodle {
+  width: 62px;
+  height: 30px;
+}
+@media (max-width: 960px) {
+  .section-doodle,
+  .doodle-note {
+    display: none;
+  }
+  .sticker {
+    width: 72px;
+    height: 72px;
+    padding: 11px;
+    top: -26px;
+  }
+  .spark-a {
+    right: 70px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .d-spin,
+  .d-bob {
+    animation: none;
+  }
+}

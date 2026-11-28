@@ -106,6 +106,169 @@ function useLiveStats() {
   return live;
 }
 
+// ---------------------------------------------------------------
+// Hand-drawn doodles. Original SVG line art drawn for this site (no stock
+// icons or clip art). Purely decorative, so they are hidden from screen readers.
+// ---------------------------------------------------------------
+const rad = (d) => (d * Math.PI) / 180;
+const arc = (cx, cy, r, a0, a1) => {
+  const p = (a) =>
+    `${(cx + r * Math.cos(rad(a))).toFixed(1)} ${(cy + r * Math.sin(rad(a))).toFixed(1)}`;
+  return `M${p(a0)} A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${p(a1)}`;
+};
+// Fingerprint: arches on top, loops below, each ring with its own gap.
+const PRINT_RINGS = [
+  [10, 188, 352],
+  [18, 184, 356],
+  [26, 180, 360],
+  [34, 178, 362],
+  [42, 182, 358],
+];
+const PRINT_LOOPS = [
+  [7, 20, 160],
+  [15, 14, 166],
+  [23, 8, 172],
+  [31, 4, 176],
+];
+// Gear: 8 teeth, slightly uneven so it looks drawn by hand.
+const GEAR = (() => {
+  const n = 8;
+  const pts = [];
+  for (let k = 0; k < n; k++) {
+    const a = (k * 2 * Math.PI) / n;
+    const w = Math.sin(k * 12.9898) * 1.4;
+    [
+      [26, -0.3],
+      [35 + w, -0.17],
+      [35 + w, 0.17],
+      [26, 0.3],
+    ].forEach(([r, o]) =>
+      pts.push(
+        `${(50 + r * Math.cos(a + o)).toFixed(1)} ${(50 + r * Math.sin(a + o)).toFixed(1)}`,
+      ),
+    );
+  }
+  return `M${pts.join(" L")} Z`;
+})();
+
+function Doodle({ name, className = "" }) {
+  const svg = (children, view = "0 0 100 100", extra = "") => (
+    <svg
+      className={`doodle ${extra} ${className}`}
+      viewBox={view}
+      aria-hidden="true"
+      focusable="false"
+    >
+      {children}
+    </svg>
+  );
+  switch (name) {
+    case "fingerprint":
+      return svg(
+        <>
+          {PRINT_RINGS.map(([r, a, b]) => (
+            <path key={`t${r}`} d={arc(50, 54, r, a, b)} />
+          ))}
+          {PRINT_LOOPS.map(([r, a, b]) => (
+            <path key={`l${r}`} d={arc(50, 54, r, a, b)} />
+          ))}
+          <path d="M50 44 V64" strokeDasharray="2 5" />
+        </>,
+      );
+    case "gear":
+      return svg(
+        <>
+          <path d={GEAR} className="fill-h" />
+          <circle cx="50" cy="50" r="11" className="fill-c" />
+          <path d="M44 50 L48.5 54.5 L57 45.5" />
+        </>,
+        "0 0 100 100",
+        "d-spin",
+      );
+    case "pencil":
+      return svg(
+        <>
+          <path d="M18 82 L28 56 L72 12 L88 28 L44 72 Z" className="fill-h" />
+          <path d="M18 82 L28 56 L44 72 Z" className="fill-c" />
+          <path d="M64 20 L80 36" />
+          <path d="M26 62 L38 74" />
+          <path d="M52 88 C62 80 70 92 82 84 C88 80 92 84 94 82" />
+        </>,
+      );
+    case "clock":
+      return svg(
+        <>
+          <circle cx="50" cy="52" r="34" className="fill-c" />
+          <path d="M50 52 V30" />
+          <path d="M50 52 L66 60" />
+          <path d="M50 22 V26 M80 52 H76 M50 82 V78 M20 52 H24" />
+          <path d="M30 14 C22 14 16 20 16 28" className="fill-o" />
+          <path d="M70 14 C78 14 84 20 84 28" />
+        </>,
+        "0 0 100 100",
+        "d-bob",
+      );
+    case "code":
+      return svg(
+        <>
+          <rect x="8" y="22" width="84" height="58" rx="6" className="fill-c" />
+          <path d="M8 38 H92" />
+          <circle cx="18" cy="30" r="2" className="fill-o" />
+          <circle cx="27" cy="30" r="2" className="fill-h" />
+          <path d="M34 52 L22 60 L34 68" />
+          <path d="M66 52 L78 60 L66 68" />
+          <path d="M55 48 L45 72" />
+        </>,
+      );
+    case "coffee":
+      return svg(
+        <>
+          <path
+            d="M22 42 H68 V62 C68 76 58 86 45 86 C32 86 22 76 22 62 Z"
+            className="fill-h"
+          />
+          <path d="M68 48 C86 46 86 68 66 68" />
+          <path d="M34 32 C28 24 40 20 34 10" />
+          <path d="M52 32 C46 24 58 20 52 10" />
+          <path d="M32 58 C36 64 44 66 50 64" />
+        </>,
+        "0 0 100 100",
+        "d-bob",
+      );
+    case "plane":
+      return svg(
+        <>
+          <path d="M12 46 L90 14 L66 86 L46 60 Z" className="fill-c" />
+          <path d="M46 60 L90 14" />
+          <path d="M46 60 L44 82 L56 70" className="fill-o" />
+          <path
+            d="M8 82 C16 72 24 88 32 76 C36 70 40 74 42 72"
+            strokeDasharray="1 6"
+          />
+        </>,
+        "0 0 100 100",
+        "d-bob",
+      );
+    case "arrow":
+      return svg(
+        <>
+          <path d="M84 32 C60 40 34 34 12 14" />
+          <path d="M12 14 L25 13 M12 14 L16 27" />
+        </>,
+        "0 0 90 44",
+      );
+    case "spark":
+      return svg(
+        <path
+          d="M50 8 L57 42 L92 50 L57 58 L50 92 L43 58 L8 50 L43 42 Z"
+          className="fill-h"
+        />,
+      );
+    default:
+      return null;
+  }
+}
+
 function Header() {
   const active = useActiveSection(SECTION_IDS);
   const time = useManilaTime();
@@ -285,10 +448,20 @@ function Hero() {
                 Resume
               </a>
             )}
+            <span className="doodle-note mono" aria-hidden="true">
+              <Doodle name="arrow" /> hire me!
+            </span>
           </div>
           <SocialLinks />
         </div>
-        <SystemMap />
+        <div className="map-wrap">
+          <SystemMap />
+          <span className="sticker" aria-hidden="true">
+            <Doodle name="fingerprint" />
+          </span>
+          <Doodle name="spark" className="spark spark-a" />
+          <Doodle name="spark" className="spark spark-b" />
+        </div>
       </div>
       <div className="container stats">
         {stats.map((s) => (
@@ -302,10 +475,11 @@ function Hero() {
   );
 }
 
-function Section({ id, label, title, hidden, children }) {
+function Section({ id, label, title, hidden, doodle, children }) {
   return (
     <section id={id} className="section" hidden={hidden}>
       <div className="container reveal">
+        {doodle && <Doodle name={doodle} className="section-doodle" />}
         <p className="kicker mono">{label}</p>
         <h2 className="section-title">{title}</h2>
         {children}
@@ -316,7 +490,12 @@ function Section({ id, label, title, hidden, children }) {
 
 function Work() {
   return (
-    <Section id="work" label="01 / work orders" title="Systems I've shipped">
+    <Section
+      id="work"
+      label="01 / work orders"
+      title="Systems I've shipped"
+      doodle="gear"
+    >
       <div className="projects-grid">
         {projects.map((p, i) => (
           <article
@@ -366,6 +545,7 @@ function Services() {
   return (
     <Section
       id="services"
+      doodle="pencil"
       label="02 / for clients"
       title="What I can build for your business"
     >
@@ -398,7 +578,12 @@ function Services() {
 
 function Experience() {
   return (
-    <Section id="experience" label="03 / log" title="Where I've worked">
+    <Section
+      id="experience"
+      label="03 / log"
+      title="Where I've worked"
+      doodle="clock"
+    >
       <div className="timeline">
         {experience.map((job) => (
           <article className="job card" key={job.company}>
@@ -425,7 +610,12 @@ function Experience() {
 
 function Stack() {
   return (
-    <Section id="stack" label="04 / toolbox" title="Tools I work with">
+    <Section
+      id="stack"
+      label="04 / toolbox"
+      title="Tools I work with"
+      doodle="code"
+    >
       <div className="skills-grid">
         {skills.map((g) => (
           <div className="card" key={g.group}>
@@ -446,7 +636,12 @@ function Stack() {
 
 function About() {
   return (
-    <Section id="about" label="05 / about" title="Who's behind the systems">
+    <Section
+      id="about"
+      label="05 / about"
+      title="Who's behind the systems"
+      doodle="coffee"
+    >
       <div className="about-grid">
         <div className="prose">
           {about.map((p) => (
@@ -572,6 +767,7 @@ function Contact() {
   return (
     <section id="contact" className="section contact">
       <div className="container reveal">
+        <Doodle name="plane" className="section-doodle" />
         <p className="kicker mono">06 / contact</p>
         <h2 className="section-title">Open a work order</h2>
         <p className="lead">
