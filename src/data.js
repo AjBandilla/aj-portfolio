@@ -11,7 +11,7 @@ export const profile = {
   name: "Ariel John Bandilla",
   title: "Full Stack Developer",
   tagline:
-    "I build Laravel and React web systems for business operations: inventory, attendance, recruitment, and HR, used by 1,000+ people daily.",
+    "Laravel and React systems for business operations: inventory, attendance, recruitment, and HR, used by 1,000+ people daily.",
   location: "General Mariano Alvarez, Cavite, PH",
   email: "bandillaaj9@gmail.com",
   phone: "+63 956 364 9802",
@@ -22,26 +22,63 @@ export const profile = {
 };
 
 export const stats = [
-  { value: "1,000+", label: "Daily active users served" },
+  { value: "1,000+", label: "People using my systems daily" },
+  { value: "300+", label: "Job applications processed daily" },
   { value: "40%", label: "Faster API response time" },
-  { value: "85%", label: "Test coverage (up from 40%)" },
-  { value: "300+", label: "Applications processed daily" },
+  { value: "85%", label: "Test coverage, up from 40%" },
 ];
 
 export const about = [
-  "I'm a Full Stack Developer working on internal business systems for a manufacturing company in Cavite: inventory, biometric attendance, recruitment, and HR. I use Laravel for the back end and React for the front end.",
-  "I finished my BS in Information Technology at Eastern Samar State University in 2024. I'm open to full-time roles and commission-based projects in web development.",
+  "Most software gets demoed once. Mine gets used every day by 1,000+ people: clocking in, requesting supplies, getting hired, getting paid. I build the systems behind those everyday moments in Laravel and React, all the way down to the fingerprint scanner on the machine.",
+  "I like work where software replaces something people do by hand again and again: a paper sign-in, a stock count, a report put together piece by piece. I finished my BS in Information Technology at Eastern Samar State University in 2024, and now I'm looking for a team to grow with, or a project I can own from first call to launch.",
 ];
 
-export const openTo = [
+// What a client or employer gets. Edit freely.
+export const services = [
   {
-    title: "Full-time roles",
-    text: "Looking for a team where I can take on bigger projects and more responsibility in web development.",
+    code: "S1",
+    title: "Websites",
+    text: "A fast, clean, mobile-friendly site for your business, brand, or portfolio, live on your own domain.",
+    examples: [
+      "Business and landing pages",
+      "Portfolios and personal sites",
+      "Hosting and deployment",
+    ],
   },
   {
-    title: "Commission-based projects",
-    text: "Websites, web apps, and business systems built to your requirements, on a per-project basis.",
+    code: "S2",
+    title: "Custom web apps",
+    text: "Dashboards, portals, and tools built around how you actually work, instead of forcing your process into someone else's software.",
+    examples: [
+      "Admin dashboards",
+      "Staff and customer portals",
+      "Tracking and management tools",
+    ],
   },
+  {
+    code: "S3",
+    title: "Automation and integrations",
+    text: "Stop doing the same task by hand. Automatic reports, data syncing, and connections between your tools and devices.",
+    examples: [
+      "Automated reports",
+      "Data import and export",
+      "API and device integrations",
+    ],
+  },
+];
+
+export const process = [
+  ["Brief", "You tell me the problem and who uses it."],
+  ["Scope", "I confirm what gets built and what it costs."],
+  ["Build", "Delivered in stages so you can react early."],
+  ["Handover", "Deployed, tested, and explained."],
+];
+
+export const projectTypes = [
+  "Business system",
+  "Website",
+  "Web app",
+  "Full-time role",
 ];
 
 export const skills = [
@@ -70,8 +107,9 @@ export const experience = [
     place: "Cavite, PH",
     period: "March 2025 – Present",
     points: [
-      "Built and shipped REST APIs in Laravel and Node.js serving 1,000+ daily active users, cutting average response time by 40%.",
-      "Developed responsive front-end features in React and Tailwind CSS, increasing sign-up conversion by 25%.",
+      "Built four connected internal systems (inventory, attendance, recruitment, HRIS) in Laravel and React, used by 1,000+ people daily.",
+      "Shipped REST APIs in Laravel and Node.js, cutting average response time by 40%.",
+      "Integrated ZKTeco biometric devices and SecuGen scanners so production-line operators record attendance at their own machines, with reports flowing to Finance for payroll.",
       "Wrote unit and integration tests, raising code coverage from 40% to 85% and reducing production bugs.",
     ],
   },
@@ -80,18 +118,10 @@ export const experience = [
 // Project names are generic on purpose. No company links, names, or screenshots.
 export const projects = [
   {
-    name: "Inventory Portal",
-    tag: "Inventory · 2025",
-    stack: ["Laravel", "React"],
-    desc: "Inventory management portal for company stock, stored items, and client-consigned materials.",
-    points: [
-      "Employee request system for work-related supplies and materials, with tracking of client-consigned items.",
-      "Automated reports generated and sent to clients from the store department.",
-    ],
-  },
-  {
+    id: "WO-01",
     name: "Attendance Monitoring System",
-    tag: "Attendance · 2025",
+    year: "2025",
+    hook: "Operators clock in at the machine they run.",
     stack: ["Laravel", "React", "ZKTeco", "SecuGen"],
     desc: "Real-time attendance monitoring integrated with ZKTeco biometric fingerprint devices.",
     points: [
@@ -100,8 +130,22 @@ export const projects = [
     ],
   },
   {
+    id: "WO-02",
+    name: "Inventory Portal",
+    year: "2025",
+    hook: "Every item accounted for, including the client's.",
+    stack: ["Laravel", "React"],
+    desc: "Inventory management portal for company stock, stored items, and client-consigned materials.",
+    points: [
+      "Employee request system for work-related supplies and materials, with tracking of client-consigned items.",
+      "Automated reports generated and sent to clients from the store department.",
+    ],
+  },
+  {
+    id: "WO-03",
     name: "Recruitment Platform",
-    tag: "Recruitment · 2026",
+    year: "2026",
+    hook: "300+ applications a day, straight into the employee list.",
     stack: ["Laravel", "React"],
     desc: "Career and job-posting platform processing 300+ applications daily.",
     points: [
@@ -109,12 +153,26 @@ export const projects = [
     ],
   },
   {
+    id: "WO-04",
     name: "Human Resource Information System",
-    tag: "HR · 2026",
+    year: "2026",
+    hook: "One master list, with insurance and reports built in.",
     stack: ["Laravel", "React"],
     desc: "HRIS for employee master list management with integrated Health Insurance and Life Insurance modules.",
     points: [
       "Automated HR reports generated and sent to the company's head office.",
+    ],
+  },
+  {
+    id: "WO-05",
+    name: "Performance Appraisal System",
+    year: "", // add the year you delivered it, e.g. "2026"
+    hook: "Appraisal results flow straight into payroll changes.",
+    stack: ["Laravel", "React"], // check this matches what you used
+    desc: "Performance appraisal system with an integrated payroll change notice.",
+    points: [
+      "Appraisal outcomes feed the payroll change notice, so pay updates follow the evaluation.",
+      // Add 1-2 real details here: who uses it, how many employees, what it replaced.
     ],
   },
 ];
@@ -135,8 +193,9 @@ export const education = {
   ],
 };
 
-export const languages = [
-  { name: "Waray-Waray", level: "Native" },
-  { name: "Filipino (Tagalog)", level: "Fluent" },
-  { name: "English", level: "Professional working proficiency" },
+export const whyMe = [
+  "My systems are in daily use by 1,000+ people, not left as demos.",
+  "I connect software to real devices like fingerprint scanners, not just screens.",
+  "I test what I ship: coverage raised from 40% to 85%.",
+  "Reports go out automatically, so nobody rebuilds them by hand.",
 ];
