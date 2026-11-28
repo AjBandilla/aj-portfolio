@@ -137,37 +137,6 @@ ol {
   white-space: nowrap;
 }
 
-/* Live counter pill: far right of the header */
-.live-counter {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 5px 10px;
-  border: 2px solid var(--ink);
-  border-radius: 3px;
-  background: var(--ink);
-  color: var(--paper);
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-  transition: 0.15s;
-}
-.live-counter:hover {
-  background: var(--orange);
-  color: var(--ink);
-}
-.live-counter strong {
-  color: var(--hazard);
-  font-weight: 600;
-}
-.live-counter:hover strong {
-  color: var(--ink);
-}
-.live-counter:focus-visible {
-  outline: 3px solid var(--orange);
-  outline-offset: 2px;
-}
-
 .menu-btn {
   display: none;
   background: none;
@@ -852,14 +821,9 @@ h1 {
 }
 
 /* Responsive */
-/* Header gets crowded on mid-size screens: drop the name, then the pill */
+/* Header gets crowded on mid-size screens: drop the name */
 @media (max-width: 1180px) {
   .brand-name {
-    display: none;
-  }
-}
-@media (max-width: 1020px) {
-  .live-counter {
     display: none;
   }
 }
@@ -934,5 +898,153 @@ h1 {
   }
   .process li:last-child {
     border-bottom: 0;
+  }
+}
+
+/* Floating live counters (right edge) */
+.float-stats {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  width: 176px;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: float-in 0.45s ease both;
+}
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translate(24px, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+.float-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--ink);
+  color: var(--hazard);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.float-head .led {
+  margin-right: 6px;
+}
+.float-close {
+  background: none;
+  border: 0;
+  color: var(--paper);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+.float-close:hover {
+  color: var(--orange);
+}
+.float-rows li {
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--ink);
+  display: grid;
+  gap: 2px;
+}
+.float-rows li:nth-child(1) {
+  background: var(--hazard);
+}
+.float-rows strong {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 900;
+  font-stretch: 108%;
+  letter-spacing: -0.03em;
+}
+.float-rows span {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.float-rows li:nth-child(1) span {
+  color: var(--ink);
+}
+.float-note {
+  padding: 7px 12px;
+  font-size: 10.5px;
+  color: var(--ink-2);
+  text-align: center;
+}
+.float-tab {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 46px;
+  padding: 12px 0;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--ink);
+  border-right: 0;
+  border-radius: var(--radius) 0 0 var(--radius);
+  box-shadow: -4px 4px 0 rgba(22, 21, 15, 0.25);
+  cursor: pointer;
+  transition: 0.15s;
+}
+.float-tab:hover {
+  background: var(--orange);
+  color: var(--ink);
+  width: 52px;
+}
+.float-tab strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hazard);
+}
+.float-tab:hover strong {
+  color: var(--ink);
+}
+.float-tab-label {
+  writing-mode: vertical-rl;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.float-stats:focus-within,
+.float-tab:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+@media (max-width: 760px) {
+  .float-stats {
+    top: auto;
+    bottom: 14px;
+    transform: none;
+    animation: none;
+    width: 160px;
+  }
+  .float-tab {
+    top: auto;
+    bottom: 14px;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-stats {
+    animation: none;
   }
 }

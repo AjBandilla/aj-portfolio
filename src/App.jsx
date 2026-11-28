@@ -106,7 +106,7 @@ function useLiveStats() {
   return live;
 }
 
-function Header({ live }) {
+function Header() {
   const active = useActiveSection(SECTION_IDS);
   const time = useManilaTime();
   const [open, setOpen] = useState(false);
@@ -141,24 +141,6 @@ function Header({ live }) {
         <div className="clock mono" title="Local time in the Philippines">
           <span className="led" /> PH {time}
         </div>
-        {live.ready && (
-          <a
-            href="#stats"
-            className="live-counter mono"
-            title="Live site counters"
-          >
-            <span className="led" />
-            <span>
-              <strong>{(live.visits ?? 0).toLocaleString()}</strong> visits
-            </span>
-            <span>
-              <strong>{(live.projects ?? 0).toLocaleString()}</strong> projects
-            </span>
-            <span>
-              <strong>{(live.jobs ?? 0).toLocaleString()}</strong> job offers
-            </span>
-          </a>
-        )}
       </div>
     </header>
   );
@@ -523,6 +505,63 @@ function LiveStats({ live }) {
   );
 }
 
+// Floating side panel on the right edge. Open on wide screens, a slim tab
+// on narrower ones so it never covers the content. Click to expand/collapse.
+function FloatingStats({ live }) {
+  const [open, setOpen] = useState(
+    () => typeof window !== "undefined" && window.innerWidth >= 1500,
+  );
+  if (!live.ready) return null;
+
+  const rows = [
+    ["Visits", live.visits],
+    ["Projects", live.projects],
+    ["Job offers", live.jobs],
+  ];
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        className="float-tab mono"
+        onClick={() => setOpen(true)}
+        aria-label="Show live counters"
+      >
+        <span className="led" />
+        <strong>{(live.visits ?? 0).toLocaleString()}</strong>
+        <span className="float-tab-label">visits</span>
+      </button>
+    );
+  }
+
+  return (
+    <aside className="float-stats" aria-label="Live site counters">
+      <div className="float-head mono">
+        <span>
+          <span className="led" /> live
+        </span>
+        <button
+          type="button"
+          className="float-close"
+          onClick={() => setOpen(false)}
+          aria-label="Hide live counters"
+        >
+          ×
+        </button>
+      </div>
+      <ul className="float-rows">
+        {rows.map(([label, value]) => (
+          <li key={label}>
+            <strong>{(value ?? 0).toLocaleString()}</strong>
+            <span className="mono">{label}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="float-note mono">Updates automatically</p>
+    </aside>
+  );
+}
+
 const EMPTY_FORM = { name: "", email: "", message: "", company: "" };
 
 // Sends the message to /api/contact (a Vercel serverless function).
@@ -674,7 +713,8 @@ export default function App() {
   const live = useLiveStats();
   return (
     <>
-      <Header live={live} />
+      <Header />
+      <FloatingStats live={live} />
       <main>
         <Hero />
         <div className="hazard" aria-hidden="true" />
