@@ -145,6 +145,7 @@ export const projects = [
     id: "WO-03",
     name: "Recruitment Platform",
     year: "2026",
+    link: "https://recruitment.telfordph.com",
     hook: "300+ applications a day, straight into the employee list.",
     stack: ["Laravel", "React"],
     desc: "Career and job-posting platform processing 300+ applications daily.",
