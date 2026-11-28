@@ -204,7 +204,7 @@ function SystemMap() {
         </span>
         <span>3 flows · live</span>
       </div>
-      <svg viewBox="0 0 520 260" role="img" aria-hidden="true">
+      <svg viewBox="0 0 520 280" role="img" aria-hidden="true">
         {LANES.map((lane, li) => {
           const y = 8 + li * LANE_STEP;
           return (
