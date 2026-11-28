@@ -13,7 +13,7 @@ import {
   whyMe,
 } from "./data.js";
 
-// "Stats" is no longer a nav tab: the live counters sit at the right of the header.
+// The live counters are a floating panel on the right edge (see FloatingStats).
 const NAV = [
   ["work", "Work"],
   ["services", "Services"],
@@ -473,38 +473,6 @@ function About() {
   );
 }
 
-// Full counters section. The header pill links here (#stats).
-function LiveStats({ live }) {
-  const items = [
-    ["Visits", live.visits, "People who opened this site"],
-    ["Project requests", live.projects, "Websites, web apps, business systems"],
-    ["Job offers", live.jobs, "Messages about full-time roles"],
-  ];
-  return (
-    <Section
-      id="stats"
-      label="06 / live"
-      title="Live counters"
-      hidden={!live.ready}
-    >
-      <div className="counters">
-        {items.map(([label, value, note]) => (
-          <div className="card counter" key={label}>
-            <p className="mono label">
-              <span className="led" /> {label}
-            </p>
-            <strong>{(value ?? 0).toLocaleString()}</strong>
-            <span className="muted small">{note}</span>
-          </div>
-        ))}
-      </div>
-      <p className="muted small mono counters-note">
-        Updates automatically. Counted since this site went live.
-      </p>
-    </Section>
-  );
-}
-
 // Floating side panel on the right edge. Open on wide screens, a slim tab
 // on narrower ones so it never covers the content. Click to expand/collapse.
 function FloatingStats({ live }) {
@@ -593,7 +561,7 @@ function Contact() {
   return (
     <section id="contact" className="section contact">
       <div className="container reveal">
-        <p className="kicker mono">07 / contact</p>
+        <p className="kicker mono">06 / contact</p>
         <h2 className="section-title">Open a work order</h2>
         <p className="lead">
           Hiring, or have something that needs building? Tell me what it is and
@@ -723,7 +691,6 @@ export default function App() {
         <Experience />
         <Stack />
         <About />
-        <LiveStats live={live} />
         <Contact />
       </main>
       <footer className="footer">
