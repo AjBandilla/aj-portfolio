@@ -260,7 +260,8 @@ function Hero() {
       <div className="container hero-grid">
         <div>
           <p className="status mono">
-            <span className="led" /> Available · full-time roles and commissions
+            <span className="led" /> Available for commission-based projects ·
+            Job offers are open
           </p>
           <h1>
             I build the software that keeps a{" "}

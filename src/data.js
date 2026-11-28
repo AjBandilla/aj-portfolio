@@ -78,7 +78,7 @@ export const projectTypes = [
   "Business system",
   "Website",
   "Web app",
-  "Full-time role",
+  "Job offers",
 ];
 
 export const skills = [

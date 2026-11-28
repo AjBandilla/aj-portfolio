@@ -7,7 +7,7 @@
 
 import { redis } from "./_redis.js";
 
-const TYPES = ["Business system", "Website", "Web app", "Full-time role"];
+const TYPES = ["Business system", "Website", "Web app", "Job offers"];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Strip line breaks so user input can't inject extra email headers.
@@ -70,7 +70,7 @@ export default async function handler(req, res) {
     // Count the message (only after the email really went out).
     // A counter problem must never make the visitor's message look failed.
     try {
-      const key = type === "Full-time role" ? "stats:jobs" : "stats:projects";
+      const key = type === "Job offers" ? "stats:jobs" : "stats:projects";
       await redis([["INCR", key]]);
     } catch (err) {
       console.error("Counter update failed", err);
