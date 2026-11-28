@@ -338,6 +338,16 @@ function Work() {
                 <li key={pt}>{pt}</li>
               ))}
             </ul>
+            {p.link && (
+              <a
+                className="project-link mono"
+                href={p.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Visit {new URL(p.link).hostname} ↗
+              </a>
+            )}
             <div className="chips">
               {p.stack.map((s) => (
                 <span className="chip" key={s}>
