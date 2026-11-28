@@ -13,13 +13,13 @@ import {
   whyMe,
 } from "./data.js";
 
+// "Stats" is no longer a nav tab: the live counters sit at the right of the header.
 const NAV = [
   ["work", "Work"],
   ["services", "Services"],
   ["experience", "Experience"],
   ["stack", "Stack"],
   ["about", "About"],
-  ["stats", "Stats"],
   ["contact", "Contact"],
 ];
 
@@ -80,7 +80,7 @@ function useManilaTime() {
 }
 
 // Counts this visit (once per browser session) and loads the live counters.
-// If the database isn't connected, `ready` stays false and the Stats tab stays hidden.
+// If the database isn't connected, `ready` stays false and the counters stay hidden.
 function useLiveStats() {
   const [live, setLive] = useState({ ready: false });
   useEffect(() => {
@@ -106,7 +106,7 @@ function useLiveStats() {
   return live;
 }
 
-function Header({ showStats }) {
+function Header({ live }) {
   const active = useActiveSection(SECTION_IDS);
   const time = useManilaTime();
   const [open, setOpen] = useState(false);
@@ -127,22 +127,38 @@ function Header({ showStats }) {
           <span />
         </button>
         <nav className={`nav ${open ? "open" : ""}`}>
-          {NAV.filter(([id]) => id !== "stats" || showStats).map(
-            ([id, label]) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className={active === id ? "active" : ""}
-                onClick={() => setOpen(false)}
-              >
-                {label}
-              </a>
-            ),
-          )}
+          {NAV.map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={active === id ? "active" : ""}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </a>
+          ))}
         </nav>
         <div className="clock mono" title="Local time in the Philippines">
           <span className="led" /> PH {time}
         </div>
+        {live.ready && (
+          <a
+            href="#stats"
+            className="live-counter mono"
+            title="Live site counters"
+          >
+            <span className="led" />
+            <span>
+              <strong>{(live.visits ?? 0).toLocaleString()}</strong> visits
+            </span>
+            <span>
+              <strong>{(live.projects ?? 0).toLocaleString()}</strong> projects
+            </span>
+            <span>
+              <strong>{(live.jobs ?? 0).toLocaleString()}</strong> job offers
+            </span>
+          </a>
+        )}
       </div>
     </header>
   );
@@ -475,7 +491,7 @@ function About() {
   );
 }
 
-// Visit and message counters, updated automatically from /api/stats.
+// Full counters section. The header pill links here (#stats).
 function LiveStats({ live }) {
   const items = [
     ["Visits", live.visits, "People who opened this site"],
@@ -658,7 +674,7 @@ export default function App() {
   const live = useLiveStats();
   return (
     <>
-      <Header showStats={live.ready} />
+      <Header live={live} />
       <main>
         <Hero />
         <div className="hazard" aria-hidden="true" />

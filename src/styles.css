@@ -83,7 +83,7 @@ ol {
 .header-inner {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   height: 64px;
 }
 .brand {
@@ -134,7 +134,40 @@ ol {
   font-size: 12.5px;
   font-weight: 600;
   background: var(--card);
+  white-space: nowrap;
 }
+
+/* Live counter pill: far right of the header */
+.live-counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: 0.15s;
+}
+.live-counter:hover {
+  background: var(--orange);
+  color: var(--ink);
+}
+.live-counter strong {
+  color: var(--hazard);
+  font-weight: 600;
+}
+.live-counter:hover strong {
+  color: var(--ink);
+}
+.live-counter:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
 .menu-btn {
   display: none;
   background: none;
@@ -792,7 +825,44 @@ h1 {
   }
 }
 
+/* Live counters section */
+.counters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.counter {
+  display: grid;
+  gap: 6px;
+}
+.counter .label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.counter strong {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1;
+  font-weight: 900;
+  font-stretch: 108%;
+  letter-spacing: -0.03em;
+}
+.counters-note {
+  margin-top: 22px;
+}
+
 /* Responsive */
+/* Header gets crowded on mid-size screens: drop the name, then the pill */
+@media (max-width: 1180px) {
+  .brand-name {
+    display: none;
+  }
+}
+@media (max-width: 1020px) {
+  .live-counter {
+    display: none;
+  }
+}
 @media (max-width: 960px) {
   .hero-grid,
   .about-grid {
@@ -844,6 +914,9 @@ h1 {
   .section {
     padding: 64px 0;
   }
+  .counters {
+    grid-template-columns: 1fr;
+  }
 }
 @media (max-width: 480px) {
   .skills-grid {
@@ -861,36 +934,5 @@ h1 {
   }
   .process li:last-child {
     border-bottom: 0;
-  }
-}
-
-/* Live counters */
-.counters {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.counter {
-  display: grid;
-  gap: 6px;
-}
-.counter .label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.counter strong {
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  line-height: 1;
-  font-weight: 900;
-  font-stretch: 108%;
-  letter-spacing: -0.03em;
-}
-.counters-note {
-  margin-top: 22px;
-}
-@media (max-width: 760px) {
-  .counters {
-    grid-template-columns: 1fr;
   }
 }
